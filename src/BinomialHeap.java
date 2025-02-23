@@ -75,10 +75,14 @@ class BinomialHeap {
     }
 
     public void print() {
+        System.out.println("\n".repeat(2));
+        System.out.println("***********************************");
         for (BinomialTree tree : trees) {
             tree.print(0);
             System.out.println("-------------------------------");
         }
+        System.out.println("***********************************");
+        System.out.println("\n".repeat(2));
     }
 }
 
