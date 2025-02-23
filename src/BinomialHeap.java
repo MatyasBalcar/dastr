@@ -77,6 +77,7 @@ class BinomialHeap {
     public void print() {
         for (BinomialTree tree : trees) {
             tree.print(0);
+            System.out.println("-------------------------------");
         }
     }
 }

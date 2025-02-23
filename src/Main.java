@@ -10,7 +10,10 @@ public class Main {
         heap.insert(6);
         heap.insert(7);
         heap.insert(8);
+        heap.insert(9);
+        heap.insert(10);
 
+        heap.extractMin();
 
         System.out.println("Heap after insertions:");
         heap.print();
