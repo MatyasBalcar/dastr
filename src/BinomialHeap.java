@@ -32,19 +32,30 @@ class BinomialHeap {
 
         trees.remove(minTree);
         BinomialHeap tempHeap = new BinomialHeap();
-        Collections.reverse(minTree.children);
-        for (BinomialTree child : minTree.children) {
-            child.parent = null;
-            tempHeap.trees.add(child);
-        }
-        this.merge(tempHeap);
 
+        // Convert child & siblings into a separate heap
+        if (minTree.child != null) {
+            List<BinomialTree> childTrees = new ArrayList<>();
+            BinomialTree current = minTree.child;
+            while (current != null) {
+                BinomialTree nextSibling = (current.siblings.isEmpty()) ? null : current.siblings.get(0);
+                current.parent = null;
+                current.siblings.clear(); // Break sibling connection
+                childTrees.add(current);
+                current = nextSibling;
+            }
+            Collections.reverse(childTrees); // Reverse to maintain order
+            tempHeap.trees.addAll(childTrees);
+        }
+
+        this.merge(tempHeap);
         return minKey;
     }
 
     public void decreaseKey(BinomialTree node, int newKey) {
         if (newKey > node.key) throw new IllegalArgumentException("New key must be smaller");
         node.key = newKey;
+
         while (node.parent != null && node.key < node.parent.key) {
             int temp = node.key;
             node.key = node.parent.key;
@@ -85,5 +96,3 @@ class BinomialHeap {
         System.out.println("\n".repeat(2));
     }
 }
-
-
